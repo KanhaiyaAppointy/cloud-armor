@@ -12,7 +12,7 @@ variable "region" {
 variable "default_preview_mode" {
   description = "Default preview mode setting for all policies (can be overridden per policy)"
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "security_policies" {

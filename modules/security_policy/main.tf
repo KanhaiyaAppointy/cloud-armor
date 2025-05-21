@@ -21,7 +21,7 @@ resource "google_compute_security_policy" "endpoint_throttling_policy" {
     for_each = { for idx, endpoint in var.endpoints : idx => endpoint }
     
     content {
-      action      = var.preview_mode ? "throttle" : "throttle"
+      action      = "throttle"
       priority    = 1000 + rule.key
       description = "Rate limit for ${rule.value}"
       
