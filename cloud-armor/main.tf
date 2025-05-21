@@ -3,11 +3,6 @@ provider "google" {
   region  = var.region
 }
 
-provider "google-beta" {
-  project = var.project_id
-  region  = var.region
-}
-
 locals {
   # Build the expression for matching any of the specified endpoints
   endpoint_expression = join(" || ", [
