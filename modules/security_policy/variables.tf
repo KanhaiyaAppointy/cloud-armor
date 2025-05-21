@@ -1,34 +1,34 @@
 variable "project_id" {
-  description = "The Google Cloud project ID"
   type        = string
+  description = "GCP Project ID"
 }
 
 variable "region" {
-  description = "The Google Cloud region"
   type        = string
+  description = "Region for resource deployment"
 }
 
 variable "security_policy_name" {
-  description = "Name of the Cloud Armor security policy"
   type        = string
+  description = "Unique name for the security policy"
 }
 
 variable "endpoints" {
-  description = "List of endpoint paths to apply throttling to"
   type        = list(string)
+  description = "List of endpoints to apply rate limiting on"
 }
 
 variable "rate_limit_count" {
-  description = "Number of requests allowed within the interval"
   type        = number
+  description = "Number of allowed requests"
 }
 
 variable "rate_limit_interval" {
-  description = "Time interval in seconds for the rate limit"
   type        = number
+  description = "Interval in seconds"
 }
 
 variable "preview_mode" {
-  description = "Whether to enable preview mode for the security policy rules (test without enforcing)"
   type        = bool
+  description = "Enable preview mode"
 }

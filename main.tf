@@ -3,7 +3,6 @@ provider "google" {
   region  = var.region
 }
 
-# Create multiple security policies based on the security_policies variable
 module "security_policies" {
   source   = "./modules/security_policy"
   for_each = var.security_policies

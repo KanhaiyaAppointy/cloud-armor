@@ -1,27 +1,26 @@
 variable "project_id" {
-  description = "The Google Cloud project ID"
+  description = "GCP Project ID"
   type        = string
 }
 
 variable "region" {
-  description = "The Google Cloud region"
+  description = "GCP Region"
   type        = string
   default     = "us-central1"
 }
 
 variable "default_preview_mode" {
-  description = "Default preview mode setting for all policies (can be overridden per policy)"
+  description = "Global default preview mode (can be overridden per policy)"
   type        = bool
   default     = false
 }
 
 variable "security_policies" {
-  description = "Map of security policies to create, each with its own configuration"
+  description = "A map of security policies and their configurations"
   type = map(object({
     endpoints           = list(string)
     rate_limit_count    = number
     rate_limit_interval = number
     preview_mode        = optional(bool)
   }))
-  default = {}
 }
