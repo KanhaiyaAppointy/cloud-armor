@@ -1,13 +1,12 @@
-# Replace with your specific values
-project_id           = "your-project-id"
-region               = "us-central1"
-security_policy_name = "endpoint-throttling-policy"
+# Required values - replace with your specific values
+project_id           = "your-gcp-project-id"
 backend_service_name = "your-alb-backend-service-name"
 
-# Set to false when ready to enforce the policy
-preview_mode = true
+# Optional values with defaults
+region               = "us-central1"
+security_policy_name = "endpoint-throttling-policy"
 
-# Specific endpoints to throttle
+# The specific endpoints to throttle
 endpoints = [
   "/api/endpoint1",
   "/api/endpoint2",
@@ -17,5 +16,8 @@ endpoints = [
 ]
 
 # Rate limiting configuration: 100 requests per 10 seconds
-rate_limit_count        = 100
-rate_limit_interval_sec = 10
+rate_limit_count    = 100
+rate_limit_interval = 10
+
+# Set to false to enforce in production
+preview_mode        = true

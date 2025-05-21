@@ -20,11 +20,7 @@ variable "backend_service_name" {
   type        = string
 }
 
-variable "preview_mode" {
-  description = "Whether to enable preview mode for the security policy rules (test without enforcing)"
-  type        = bool
-  default     = true
-}
+# Removed throttled_ip variable as we're now rate limiting all IPs on specific endpoints
 
 variable "endpoints" {
   description = "List of endpoint paths to apply throttling to"
@@ -44,8 +40,14 @@ variable "rate_limit_count" {
   default     = 100
 }
 
-variable "rate_limit_interval_sec" {
+variable "rate_limit_interval" {
   description = "Time interval in seconds for the rate limit"
   type        = number
   default     = 10
+}
+
+variable "preview_mode" {
+  description = "Whether to enable preview mode for the security policy rules (test without enforcing)"
+  type        = bool
+  default     = true
 }
