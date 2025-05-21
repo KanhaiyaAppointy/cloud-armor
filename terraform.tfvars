@@ -20,4 +20,4 @@ rate_limit_count    = 100
 rate_limit_interval = 10
 
 # Set to false to enforce in production
-preview_mode        = true
+preview_mode = true
