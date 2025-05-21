@@ -9,45 +9,19 @@ variable "region" {
   default     = "us-central1"
 }
 
-variable "security_policy_name" {
-  description = "Name of the Cloud Armor security policy"
-  type        = string
-  default     = "endpoint-throttling-policy"
-}
-
-variable "backend_service_name" {
-  description = "Name of the existing ALB backend service to attach the policy to"
-  type        = string
-}
-
-# Removed throttled_ip variable as we're now rate limiting all IPs on specific endpoints
-
-variable "endpoints" {
-  description = "List of endpoint paths to apply throttling to"
-  type        = list(string)
-  default = [
-    "/api/endpoint1",
-    "/api/endpoint2",
-    "/api/endpoint3",
-    "/api/endpoint4",
-    "/api/endpoint5"
-  ]
-}
-
-variable "rate_limit_count" {
-  description = "Number of requests allowed within the interval"
-  type        = number
-  default     = 100
-}
-
-variable "rate_limit_interval" {
-  description = "Time interval in seconds for the rate limit"
-  type        = number
-  default     = 10
-}
-
-variable "preview_mode" {
-  description = "Whether to enable preview mode for the security policy rules (test without enforcing)"
+variable "default_preview_mode" {
+  description = "Default preview mode setting for all policies (can be overridden per policy)"
   type        = bool
   default     = true
+}
+
+variable "security_policies" {
+  description = "Map of security policies to create, each with its own configuration"
+  type = map(object({
+    endpoints           = list(string)
+    rate_limit_count    = number
+    rate_limit_interval = number
+    preview_mode        = optional(bool)
+  }))
+  default = {}
 }

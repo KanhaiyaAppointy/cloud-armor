@@ -3,15 +3,16 @@ provider "google" {
   region  = var.region
 }
 
-module "throttling_security_policy" {
-  source = "./modules/security_policy"
+# Create multiple security policies based on the security_policies variable
+module "security_policies" {
+  source   = "./modules/security_policy"
+  for_each = var.security_policies
 
   project_id           = var.project_id
   region               = var.region
-  security_policy_name = var.security_policy_name
-  backend_service_name = var.backend_service_name
-  endpoints            = var.endpoints
-  rate_limit_count     = var.rate_limit_count
-  rate_limit_interval  = var.rate_limit_interval
-  preview_mode         = var.preview_mode
+  security_policy_name = each.key
+  endpoints            = each.value.endpoints
+  rate_limit_count     = each.value.rate_limit_count
+  rate_limit_interval  = each.value.rate_limit_interval
+  preview_mode         = lookup(each.value, "preview_mode", var.default_preview_mode)
 }

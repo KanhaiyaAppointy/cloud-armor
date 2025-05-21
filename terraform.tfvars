@@ -1,23 +1,39 @@
-# Required values - replace with your specific values
-project_id           = "your-gcp-project-id"
-backend_service_name = "your-alb-backend-service-name"
+# Required values
+project_id = "your-gcp-project-id"
+region     = "us-central1"
 
-# Optional values with defaults
-region               = "us-central1"
-security_policy_name = "endpoint-throttling-policy"
+# Default preview mode for all policies (can be overridden per policy)
+default_preview_mode = true
 
-# The specific endpoints to throttle
-endpoints = [
-  "/api/endpoint1",
-  "/api/endpoint2",
-  "/api/endpoint3",
-  "/api/endpoint4",
-  "/api/endpoint5"
-]
+# Multiple security policies configuration
+security_policies = {
+  "api-throttling-policy" = {
+    endpoints = [
+      "/api/endpoint1",
+      "/api/endpoint2",
+      "/api/endpoint3"
+    ],
+    rate_limit_count    = 100,
+    rate_limit_interval = 10,
+    preview_mode        = true
+  },
 
-# Rate limiting configuration: 100 requests per 10 seconds
-rate_limit_count    = 100
-rate_limit_interval = 10
+  "admin-throttling-policy" = {
+    endpoints = [
+      "/admin/users",
+      "/admin/settings"
+    ],
+    rate_limit_count    = 50, # Lower limit for admin endpoints
+    rate_limit_interval = 60, # Over a longer period
+    preview_mode        = true
+  },
 
-# Set to false to enforce in production
-preview_mode = true
+  "public-throttling-policy" = {
+    endpoints = [
+      "/public/resources",
+      "/public/search"
+    ],
+    rate_limit_count    = 200, # Higher limit for public endpoints
+    rate_limit_interval = 5
+  }
+}

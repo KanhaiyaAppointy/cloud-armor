@@ -12,8 +12,3 @@ output "security_policy_fingerprint" {
   description = "The fingerprint of the Cloud Armor security policy"
   value       = google_compute_security_policy.endpoint_throttling_policy.fingerprint
 }
-
-output "backend_service_attachment" {
-  description = "The name of the backend service with the attached security policy"
-  value       = var.backend_service_name
-}
